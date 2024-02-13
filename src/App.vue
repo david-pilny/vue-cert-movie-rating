@@ -33,11 +33,21 @@ const movies = reactive(items)
             <span class="movie-item-rating-text">
               Rating: ({{ movie.rating }}/5)
             </span>
-            <StarIcon
-              v-for="star in movie.rating"
-              :key="`star-${star}`"
-              class="movie-item-star-icon"
-            />
+            <template v-for="star in 5" :key="`star-${star}`">
+              <StarIcon
+                v-if="star == movie.rating"
+                class="movie-item-star-icon-yellow not-allowed"
+              />
+              <StarIcon
+                v-else
+                :class="
+                  star <= movie.rating
+                    ? 'movie-item-star-icon-yellow'
+                    : 'movie-item-star-icon-gray'
+                "
+                @click="() => (movie.rating = star)"
+              />
+            </template>
           </div>
         </div>
       </div>
