@@ -1,43 +1,44 @@
 <script setup>
-import { items } from './movies.json'
+import { reactive } from 'vue'
 import { StarIcon } from '@heroicons/vue/24/solid'
+import { items } from './movies.json'
+
+const movies = reactive(items)
 </script>
 
 <template>
-  <!-- This is where your template goes	-->
-  <div class="flex flex-row justify-center items-center space-x-8">
-    <div
-      v-for="(item, index) in items"
-      :key="index"
-      class="max-w-sm bg-white rounded-lg shadow"
-    >
-      <div class="object-contain h-15">
-        <img class="rounded-t-lg" :src="item.image" alt="" />
-      </div>
+  <div class="app">
+    <div class="movie-list">
+      <div class="movie-item" v-for="movie in movies" :key="movie.id">
+        <div class="movie-item-image-wrapper">
+          <img :src="movie.image" class="movie-item-image" alt="" />
+        </div>
 
-      <div>
-        <div class="p-5">
-          <a href="#">
-            <h5
-              class="mb-2 text-2xl tracking-tight text-gray-900 dark:text-black"
-            >
-              {{ item.name }}
-            </h5>
-          </a>
-
-          <div class="mb-4">
-            <span
-              v-for="(genre, index) in item.genres"
-              :key="index"
-              class="bg-blue-100 text-white text-sm font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-indigo-700 dark:text-white"
-              >{{ genre }}</span
-            >
+        <div class="movie-item-content-wrapper">
+          <div class="movie-item-title-wrapper">
+            <h3 class="movie-item-title">{{ movie.name }}</h3>
+            <div class="movie-item-genres-wrapper">
+              <span
+                v-for="genre in movie.genres"
+                :key="`${movie.id}-${genre}`"
+                class="movie-item-genre-tag"
+                >{{ genre }}</span
+              >
+            </div>
           </div>
-
-          <p class="mb-10 font-normal text-gray-700 dark:text-black">
-            {{ item.description }}
-          </p>
-          <p>Rating: ({{ item.rating }}/5)</p>
+          <div class="movie-item-description-wrapper">
+            <p class="movie-item-description">{{ movie.description }}</p>
+          </div>
+          <div class="movie-item-rating-wrapper">
+            <span class="movie-item-rating-text">
+              Rating: ({{ movie.rating }}/5)
+            </span>
+            <StarIcon
+              v-for="star in movie.rating"
+              :key="`star-${star}`"
+              class="movie-item-star-icon"
+            />
+          </div>
         </div>
       </div>
     </div>
