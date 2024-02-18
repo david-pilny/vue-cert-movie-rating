@@ -75,3 +75,19 @@
   pointer-events: auto !important;
   cursor: not-allowed !important;
 }
+
+.movie-item-rating-badge {
+  @apply absolute top-2 right-2 flex items-center;
+}
+
+.icon-number-wrapper {
+  @apply grid grid-cols-3 grid-rows-3;
+}
+
+.movie-item-star-icon-corner {
+  @apply h-14 w-14 text-yellow-500 col-start-1 col-end-4 row-start-1 row-end-4;
+}
+
+.movie-item-rating-number {
+  @apply ml-1 text-lg text-amber-900 font-bold col-start-2 row-start-2 col-end-4 row-end-4;
+}

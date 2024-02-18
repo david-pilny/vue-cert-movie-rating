@@ -12,6 +12,12 @@ const movies = reactive(items)
       <div class="movie-item" v-for="movie in movies" :key="movie.id">
         <div class="movie-item-image-wrapper">
           <img :src="movie.image" class="movie-item-image" alt="" />
+          <div class="movie-item-rating-badge">
+            <div class="icon-number-wrapper">
+              <StarIcon class="movie-item-star-icon-corner" />
+              <span class="movie-item-rating-number">{{ movie.rating }}</span>
+            </div>
+          </div>
         </div>
 
         <div class="movie-item-content-wrapper">
