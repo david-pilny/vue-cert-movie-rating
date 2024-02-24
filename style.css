@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 .app {
-  @apply max-w-full flex items-center justify-center h-screen mx-auto;
+  @apply max-w-full flex flex-col items-center justify-center h-screen mx-auto;
 }
 
 .movie-list {
-  @apply flex items-center justify-center space-x-4;
+  @apply flex items-center justify-between space-x-4 w-9/12;
 }
 
 .movie-item {
@@ -91,3 +91,21 @@
 .movie-item-rating-number {
   @apply ml-1 text-lg text-amber-900 font-bold col-start-2 row-start-2 col-end-4 row-end-4;
 }
+
+/* .navbar {
+  @apply mb-[25px] pt-10 flex flex-row justify-between w-9/12;
+}
+
+.navbar-text {
+  @apply flex flex-row text-white items-center justify-between w-[25%];
+}
+
+.button {
+  @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded;
+}
+
+@media screen and (min-width: 1800px) {
+  .navbar-text {
+    @apply flex flex-row text-white items-center justify-between w-[20%];
+  }
+} */

@@ -1,13 +1,33 @@
-<script setup>
-import { reactive } from 'vue'
+<script lang="ts" setup>
+import { reactive, ref, computed } from 'vue'
 import { StarIcon } from '@heroicons/vue/24/solid'
+
+import Appbar from './components/Appbar.vue'
+import Modal from './components/Modal.vue'
+
 import { items } from './movies.json'
 
 const movies = reactive(items)
+const showModal = ref<boolean>(false)
+
+const totalMovies = computed(() => items.length)
+const averageRating = computed(() => {
+  const ratings = movies.map((movie) => movie.rating)
+  const totalRatings = ratings.length
+  const sumOfRatings = ratings.reduce((sum, rating) => sum + rating, 0)
+  return totalRatings > 0 ? (sumOfRatings / totalRatings).toFixed(2) : 0
+})
 </script>
 
 <template>
   <div class="app">
+    <Modal v-if="showModal" @cancel="() => (showModal = false)" />
+    <Appbar
+      :totalMovies="totalMovies"
+      :averageRating="averageRating"
+      @addMovie="() => (showModal = true)"
+    />
+
     <div class="movie-list">
       <div class="movie-item" v-for="movie in movies" :key="movie.id">
         <div class="movie-item-image-wrapper">
